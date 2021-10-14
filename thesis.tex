@@ -1,0 +1,102 @@
+% Configuration
+\input{misc/setup.tex}
+\addbibresource{bibliography/references.bib}
+%-------------------------------------------------------------------------------------------
+%	THESIS INFORMATION
+%-------------------------------------------------------------------------------------------
+% Name of the university, print elsewhere with \university
+\setuniversity{University of Bamberg}
+% URL of the university website, used for linking the university name on the title page to the website, print linked university name with \universityhref
+\setuniversityhref{https://www.uni-bamberg.de/en/}
+% Filename of the university logo, displayed on the title page
+\setuniversitylogofilename{figures/university-of-bamberg-logo-black}
+
+% Name of the faculty, print elsewhere with \faculty
+\setfaculty{Faculty of Information Systems and Applied Computer Sciences}
+% URL of the faculty website, used for linking the faculty name on the title page to the website, print linked faculty name with \facultyhref
+\setfacultyhref{https://www.uni-bamberg.de/en/wiai/}
+
+% Name of the group the thesis will be submitted to, printed on title page, print elsewhere with \group
+\setgroup{Distributed Systems Group}
+% URL of the group website, used for linking the group name on the title page to the website, print linked group name with \grouphref
+\setgrouphref{https://www.uni-bamberg.de/en/pi/}
+
+% Name of the thesis author, printed on title page, print elsewhere with \thesisauthor
+\setthesisauthor{Michael Bess}
+% Name of the city or town the author is from, print elsewhere with \thesisauthorhome
+\setthesisauthorhome{Bamberg}
+% Thesis title, printed on title page, print elsewhere with \thesistitle
+\setthesistitle{\emph{FastDB}---Yet Another Relational Database for the Java Platform}
+% Name of thesis supervisor, printed on title page, print anywhere else with \thesissupervisor
+\setthesissupervisor{Prof. Dr. William Richards}
+% Date of thesis submission, printed on title page, print elsewhere with \thesissubmissiondate
+\setthesissubmissiondate{14.12.2020}
+
+% Type of degree (Supported parameters are: BA, BSc, BEng, MA, MSc, MEng), print full title (e.g. "Master of Arts") elsewhere with \degreetype, print thesis type (e.g. "master's thesis") elsewhere with \thesistype
+\setdegreetype{MSc}
+% Name of the degree program, printed on title page, print elsewhere with \degreeprogram
+\setdegreeprogram{Applied Computer Science}
+
+% The text of the declaration of authorship, usually provided by the institution the work must be submitted to. This text will be printed on the final page of the thesis, followed by a slot for your signature, your home and the date provided to the \makedeclaration command
+\setdeclaration{In accordance with § 9 paragraph 12 APO, I hereby declare that I wrote the preceding \thesistype{} independently and did not use any sources or aids other than those indicated.\\\\
+Furthermore, I declare that the digital version corresponds without exception in content and wording to the printed copy of the \thesistype{} and that I am aware that this digital version may be subjected to a software\hyp{}aided, anonymized plagiarism inspection.}
+% The date that will be printed at the bottom of the declaration of authorship, print elsewhere by using \declarationdate
+\setdeclarationdate{14.12.2020}
+
+%-------------------------------------------------------------------------------------------
+%	END OF THESIS INFORMATION
+%-------------------------------------------------------------------------------------------
+%
+\begin{document}
+%
+% Titlepage
+\maketitle
+%
+% TOCs
+\setlength\parskip{0.3ex}
+\pagenumbering{Roman}
+\tableofcontents
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{\listfigurename}
+\listoffigures
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{\listtablename}
+\listoftables
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{\lstlistlistingname}
+\lstlistoflistings
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{Abbreviations}
+\fancyhead[LO]{\footnotesize\sc\nouppercase{Abbreviations}}
+\input{abbreviations/abbreviations.tex}
+\newpage
+\fancyhead[LO]{\footnotesize\sc\nouppercase{\leftmark}}
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\setlength\parskip{2ex}
+%
+% Insert your chapters here
+%
+\input{sections/section-1.tex}
+\newpage
+%
+\input{sections/section-2.tex}
+\newpage
+%
+\input{sections/section-3.tex}
+\newpage
+%
+% References
+\phantomsection
+\addcontentsline{toc}{section}{References}
+\printbibliography
+\newpage
+%
+% Declaration of Authorship
+\makedeclaration{\declarationdate}
+%
+\end{document}

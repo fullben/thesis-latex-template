@@ -1,0 +1,318 @@
+%===============================================================================
+% Centralized layout configuration and command definitions
+%===============================================================================
+%
+% For improved highlighting of invalid line breaks, use the option "draft".
+% Note that when using "draft", some included images might be no longer visible.
+\documentclass[a4paper, 12pt]{article}
+%
+% Include all relevant packages
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{wrapfig}
+\usepackage{courier}
+\usepackage[printonlyused]{acronym}
+\usepackage{makecell}
+% For handling web addresses
+\usepackage[hyphens, lowtilde]{url}
+%
+% Packages for improved hyphenation and general language support
+% When using hyphenated words, don't write hyphenated-word, but use hyphenated\hyp{}word instead
+\usepackage{hyphenat}
+\usepackage[USenglish]{babel}
+%
+% Packages for references and citations
+% Quotes and citations
+\usepackage{csquotes}
+% Params: don't print source identifiers such as doi, isbn, url, and eprint in bibliography, only print the year (not month) of publication in bibliography, bibliography style, number auf authors printed in bibliography, citation style, bibliography sorting order (name, year, title), printing author first name, max number of author names printed in the citation and backend
+\usepackage[doi=false, isbn=false, url=false, eprint=false, date=year, style=authoryear, maxbibnames=99, citestyle=authoryear, sorting=nyt, giveninits=false, maxcitenames=2, backend=biber]{biblatex}
+% Default behavior of the "style=authoryear" option of biblatex is to list authors in the bibliography like this: "Last1, First1 and First2 Last2 and First3 Last3"; the following line ensures that all author names will be printed as "Last, First"
+\DeclareNameAlias{sortname}{last-first}
+% Increase spacing between individual bibliography entries
+\setlength\bibitemsep{0.5\baselineskip}
+% Page dimensions
+\usepackage{geometry}
+% Character protrusion, font expansion...
+\usepackage{microtype}
+% Math mode
+\usepackage{amsmath, amssymb, mathrsfs}
+% Referencing
+\usepackage{varioref}
+% Ensures that in-text references link to the corresponding bibliography entry; "hidelinks" prevents outline boxes being drawn for these links
+\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
+%
+% Include and configure watermark (use the package option "nostamp" to hide the watermark)
+\usepackage[nostamp]{draftwatermark}
+% Improves \newcommand macro
+\usepackage{xparse}
+%
+% Configure graphicx based on output file type (PDF/DVI)
+\ifx\pdfoutput\undefined
+	\PassOptionsToPackage{dvips}{graphicx}
+\else
+	\PassOptionsToPackage{pdftex}{graphicx}
+\pdfcompresslevel=9
+\pdfpageheight=297mm
+\pdfpagewidth=210mm
+\fi
+%
+% Page layout
+\setlength\headheight{14pt}
+\setlength\topmargin{-15,4mm}
+\setlength\oddsidemargin{-0,4mm}
+\setlength\evensidemargin{-0,4mm}
+\setlength\textwidth{160mm}
+\setlength\textheight{252mm}
+%
+% Paragraph settings; no indent but offset between paragraphs
+\setlength\parindent{0mm}
+\setlength\parskip{2ex}
+%
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{} % Delete everything
+\fancyhead[LO]{\footnotesize\sc\nouppercase{\leftmark}}
+\fancyfoot[LO]{\footnotesize\sc \group}
+\fancyfoot[RO]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%
+% Prevent footnotes from breaking across pages
+\interfootnotelinepenalty=10000
+%
+% More verbose error context
+\errorcontextlines=999
+%
+% Commands for configuring thesis information
+\NewDocumentCommand{\setuniversity}{m}{\newcommand{\university}{#1}}
+\NewDocumentCommand{\setuniversityhref}{m}{
+	% This additional def ensures that the href remains unaffected by formatting commands such as MakeUpperCase, which otherwise might end up breaking the link
+	\protected\def\hrefuniversity{\href{#1}}
+	\newcommand{\universityhref}{\hrefuniversity{\university}}
+}
+\NewDocumentCommand{\setuniversitylogofilename}{m}{\newcommand{\universitylogofilename}{#1}}
+\NewDocumentCommand{\setfaculty}{m}{\newcommand{\faculty}{#1}}
+\NewDocumentCommand{\setfacultyhref}{m}{
+	\protected\def\hreffaculty{\href{#1}}
+	\newcommand{\facultyhref}{\hreffaculty{\faculty}}
+}
+\NewDocumentCommand{\setgroup}{m}{\newcommand{\group}{#1}}
+\NewDocumentCommand{\setgrouphref}{m}{
+	\protected\def\hrefgroup{\href{#1}}
+	\newcommand{\grouphref}{\hrefgroup{\group}}
+}
+\NewDocumentCommand{\setthesisauthor}{m}{\newcommand{\thesisauthor}{#1}}
+\NewDocumentCommand{\setthesisauthorhome}{m}{\newcommand{\thesisauthorhome}{#1}}
+\NewDocumentCommand{\setthesistitle}{m}{\newcommand{\thesistitle}{#1}}
+\NewDocumentCommand{\setthesissupervisor}{m}{\newcommand{\thesissupervisor}{#1}}
+\NewDocumentCommand{\setthesissubmissiondate}{m}{\newcommand{\thesissubmissiondate}{#1}}
+\newcommand\ifstringsequal{\expandafter\ifstrequal\expandafter}
+\NewDocumentCommand{\setdegreetype}{m}{
+	\ifstringsequal{#1}{BA}{\newcommand{\degreetype}{Bachelor of Arts} \newcommand{\thesistype}{bachelor's thesis}}{
+		\ifstringsequal{#1}{BSc}{\newcommand{\degreetype}{Bachelor of Science} \newcommand{\thesistype}{bachelor's thesis}}{
+			\ifstringsequal{#1}{BEng}{\newcommand{\degreetype}{Bachelor of Engineering} \newcommand{\thesistype}{bachelor's thesis}}{
+				\ifstringsequal{#1}{MA}{\newcommand{\degreetype}{Master of Arts} \newcommand{\thesistype}{master's thesis}}{
+					\ifstringsequal{#1}{MSc}{\newcommand{\degreetype}{Master of Science} \newcommand{\thesistype}{master's thesis}}{
+						\ifstringsequal{#1}{MEng}{\newcommand{\degreetype}{Master of Engineering} \newcommand{\thesistype}{master's thesis}}{\PackageError{Config}{Unknown degree type '#1'}{Supported types are: BA, BSc, BEng, MA, MSc, MEng}}
+					}
+				}
+			}
+		}
+	}
+}
+\NewDocumentCommand{\setdegreeprogram}{m}{\newcommand{\degreeprogram}{#1}}
+\NewDocumentCommand{\setdeclaration}{m}{\newcommand{\declaration}{#1}}
+\NewDocumentCommand{\setdeclarationdate}{m}{\newcommand{\declarationdate}{#1}}
+%
+% Custom environment for adjusting the the font size for a specific section of a document, based on https://tex.stackexchange.com/questions/4139/how-to-change-font-size-mid-document
+% #1 = The base font size to be used within the environment, usually 10, 11, or 12
+\newenvironment{localsize}[1]
+{%
+	\let\orignewcommand\newcommand
+	\let\newcommmand\renewcommand
+	\makeatletter
+	\input{size#1.clo}%
+	\makeatother
+	\let\newcommand\orignewcommand
+}
+{%
+	\clearpage
+}
+%
+% Custom titlepage command, which uses values provided to some of the custom \setXXX commands to populate the page
+\renewcommand{\maketitle}
+{
+\pagenumbering{Alph}
+\begin{titlepage}
+\begin{localsize}{11}
+	\newgeometry {
+		inner=3cm,
+		outer=3cm,
+		marginparsep=0mm,
+		bindingoffset=.5cm,
+		top=2.5cm,
+		bottom=2.5cm,
+		showframe
+	}
+
+	\begin{center}
+		{\LARGE \textls[130]{\MakeUppercase{\universityhref}}}\\[2pt]
+		\textsc{\facultyhref}\\
+		\vspace{2cm}
+		\includegraphics[width=0.27\linewidth]{\universitylogofilename}\\
+		\vspace{2cm}
+		{\huge \bfseries \thesistitle\par}\vspace{.2cm}
+		\textsc{\Large by}\\[.2cm]
+		{\Large \thesisauthor\par}\vspace{2.5cm}
+		A thesis submitted to the\\
+		\textsc{\grouphref}\\
+		in partial fulfillment of the requirements for the degree of\\
+		\textsc{\degreetype}\\
+		in\\
+		\textsc{\degreeprogram}\\
+		\vfill
+		Supervisor:\\
+		\thesissupervisor\\[12pt]
+		Date of submission:\\
+		\thesissubmissiondate\\
+	\end{center}
+	\restoregeometry
+\end{localsize}
+\end{titlepage}
+}
+%
+% Command for generating the declaration of authorship, which uses some values provided to some of the custom \setXXX commands
+% #1 = Date on which the declaration was signed
+\newcommand{\makedeclaration}[1]
+{
+	\fancyhead[LO]{\footnotesize\sc\nouppercase{Declaration of Authorship}}
+	\phantomsection
+	\addcontentsline{toc}{section}{Declaration of Authorship}
+	\section*{Declaration of Authorship}
+	%			
+		\declaration\\
+		\vspace*{1cm}
+			
+		\noindent \raisebox{-\baselineskip}{\shortstack[l]{\underline{\hspace{6cm}}\\\strut \thesisauthor}}
+		\hspace*{0pt}\hfill \thesisauthorhome, #1
+
+		\vspace{1pt} %Required, as otherwise the #1 won't be fully aligned to the right
+	%
+}
+%
+% Required colors for code listings, based on IntelliJ IDEA Classic Light Theme
+\definecolor{lightgray}{gray}{0.9}
+\definecolor{keywordcolor}{RGB}{0,0,128}
+\definecolor{commentcolor}{RGB}{128,128,128}
+\definecolor{indentifiercolor}{RGB}{0,0,0}
+\definecolor{stringcolor}{RGB}{101,138,186}
+\definecolor{annotationcolor}{RGB}{51,129,255}
+\definecolor{numbercolor}{RGB}{0,0,255}
+\definecolor{constantcolor}{RGB}{25,72,166}
+%
+% Settings for Java code style
+\lstdefinestyle{javaStyle}{%
+  frame=tb,%
+  aboveskip=3mm,%
+  belowskip=3mm,%
+  basicstyle=\footnotesize\ttfamily,%
+  keywordstyle=\bfseries\color{keywordcolor},%
+  identifierstyle=\color{indentifiercolor},%
+  stringstyle=\color{stringcolor},% 
+  commentstyle=\itshape\color{commentcolor},%
+  showstringspaces=false,%
+  language=Java,%
+  numbers=left,%
+  numberstyle=\tiny,%
+  stepnumber=1,%
+  numbersep=5pt,%
+  extendedchars=true,%
+  xleftmargin=2em,%
+  lineskip=-1pt,%
+  breaklines,%
+  moredelim=[is][\bfseries\textcolor{annotationcolor}]{\%\%}{\%\%},%
+  moredelim=[is][\textcolor{numbercolor}]{~~}{~~},%
+  moredelim=[is][\bfseries\itshape\textcolor{constantcolor}]{,,}{,,}
+}
+%
+% Custom environment for Java source code 
+% #1 = "caption={Your own caption here}, label={Your own label here}"
+\lstnewenvironment{javacode}[1][]{%
+	\lstset{style=javaStyle,#1}%
+}{}
+%
+% Command for inserting Java code from a source file
+% #1 = Filename relative to source directory
+% #2 = Caption
+% #3 = Label
+\newcommand{\javafile}[3]{%
+   \lstinputlisting[%
+     caption={#2},%
+     label={#3},%
+     style=javaStyle]{src/#1}%
+}
+%
+% Settings for SQL script style
+\lstdefinestyle{sqlStyle}{
+  frame=tb,%
+  aboveskip=3mm,%
+  belowskip=3mm,%
+  basicstyle=\footnotesize\ttfamily,%
+  keywordstyle=\bfseries\color{keywordcolor},%
+  identifierstyle=\color{indentifiercolor},%
+  stringstyle=\color{stringcolor},% 
+  commentstyle=\itshape\color{commentcolor},%
+  showstringspaces=false,%
+  language=SQL,%
+  numbers=left,%
+  numberstyle=\tiny,%
+  stepnumber=1,%
+  numbersep=5pt,%
+  extendedchars=true,%
+  xleftmargin=2em,%
+  lineskip=-1pt,%
+  breaklines
+}
+%
+% Custom environment for SQL script code 
+% #1 = "caption={Your own caption here}, label={Your own label here}"
+\lstnewenvironment{sqlscript}[1][]{%
+	\lstset{style=sqlStyle,#1}%
+}{}
+%
+% Command for inserting an image with a caption, wrapped in a figure environment
+% #1 = Label to be used by references
+% #2 = Name of the image file, without filename extension, must be located in the ../figures directory
+% #3 = Caption
+% #4 = Width of the image and the unit
+\newcommand{\includefigure}[4]{%
+  \begin{figure}[htb]%
+    \begin{center}%
+      \includegraphics[width=#4]{figures/#2}%
+      \vskip -0.3cm%
+      \caption{#3}%
+      \vskip -0,2cm%
+      \label{#1}%
+    \end{center}%
+  \end{figure}%
+}
+%
+% Environment for continuous text around/wrapping an image
+% #1 = Alignment: r, l, i, ...
+% #2 = Width of the image
+% #3 = Name of the image file, without filename extension, must be located in the ../figures directory
+% #4 = Caption
+% #5 = Label to be used by references
+\newcommand{\includewrappedfigure}[5]{%
+  \begin{wrapfigure}{#1}{#2}%
+    \includegraphics[width=#2]{figures/#3}%
+    \caption{#4}%
+    \label{#5}%
+  \end{wrapfigure}%
+}

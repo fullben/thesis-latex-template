@@ -1,0 +1,56 @@
+%
+\section{Conceptual Foundations}
+\label{sec:conceptual-foundations}
+%
+
+Duis sed feugiat nulla. Cras velit nunc, tempor eu lacus non, pellentesque euismod elit. Maecenas ut mi diam. Nullam tempor purus nibh, at consectetur massa porttitor et.
+
+%
+\subsection{Databases and SQL}
+\label{subsec:limitations}
+%
+
+Donec facilisis vestibulum augue, quis ornare neque sodales sit amet. Nullam consequat arcu non ex blandit malesuada. Etiam vitae facilisis justo. Ut pulvinar eu orci sed gravida. Integer tempor quis massa nec bibendum. Fusce maximus semper faucibus. Maecenas non eleifend orci, vel tempus diam. Pellentesque lacinia lorem quis tincidunt placerat. Suspendisse porta semper ornare. 
+
+\begin{sqlscript}[caption=SQL query for retrieving the data of all employees with more than 25 days of vacation{,} sorted by username.]
+SELECT *
+FROM employees
+WHERE vacationDays > 25
+ORDER BY username ASC;
+\end{sqlscript}
+
+Curabitur pretium augue blandit mi tristique elementum. Vestibulum id libero eu odio gravida faucibus non sed tortor. Pellentesque efficitur orci eget libero posuere auctor.
+
+\includefigure{fig:box-plots}{box-plots}{Some box plots.}{0.6\textwidth}
+
+Aenean neque leo, laoreet vel accumsan in, pellentesque id eros. Nam eu arcu sit amet mi rhoncus cursus. Duis volutpat, erat a suscipit interdum, mi mi tempor neque, vitae vulputate enim turpis vel turpis. In hac habitasse platea dictumst. Sed sed libero sapien. Etiam a convallis sem. 
+
+%
+\subsection{Persistence in Java}
+\label{subsec:persistence-in-java}
+%
+
+Pellentesque facilisis felis lorem, a malesuada neque bibendum sed. Donec quis erat ex. Nunc non sapien et est dignissim hendrerit et ut ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque in metus ligula. Phasellus sed elit nunc. Integer at leo sapien. Proin lacinia velit ut enim mollis, blandit egestas mi scelerisque. Curabitur tempor leo eu massa pretium dapibus. Quisque in turpis eget ex pharetra placerat. Phasellus mattis sem augue, vel cursus mi ultrices ut. Etiam nec turpis sem. Nullam vel leo at nunc tristique scelerisque. Sed et scelerisque ex, at accumsan ipsum. In ante ex, consectetur eu fermentum et, fermentum vel ex. Fusce ut consequat massa.
+
+Cras sed lacus in \ac{JPA} velit molestie fermentum euismod nec augue. Cras tincidunt porta \ac{RDBMS} scelerisque. Ut volutpat consequat justo, vel volutpat dui faucibus vestibulum. Vivamus aliquam purus vehicula orci porttitor efficitur. Nulla facilisi. Aliquam suscipit \ac{JPA} molestie elit at ornare. Nam consectetur magna in lacus porttitor, et vestibulum lectus \ac{RDBMS} pellentesque \autocite{Bloch2018}.
+
+\begin{javacode}[caption=Employee class with \acs{JPA} mapping annotations., label={lst:jpa-employee-entity}]
+%%@Entity%%
+public class Employee {
+    %%@Id%%
+    private String id;
+    %%@Column%%(optional = false, unique = true)
+    private String username;
+    %%@Column%%(optional = false)
+    private int vacationDays;
+    %%@ManyToOne%%(optional = false, fetch = FetchType.,,EAGER,,)
+    private Address address;
+    %%@OneToMany%%(fetch = FetchType.,,LAZY,,, mappedBy = "employee")
+    private List<Task> tasks;
+    ...
+    public Employee() {}
+    ...
+}
+\end{javacode}
+
+Fusce eget nisi et enim pulvinar lobortis vitae eget neque. Cras eu lobortis nulla. Praesent mattis arcu in sagittis rhoncus. Suspendisse potenti. Duis porta dolor arcu, eget iaculis risus pretium eu. Quisque pellentesque volutpat nunc sed sodales. Morbi \textcite{Bloch2018} dictum feugiat mauris, quis posuere metus auctor a. Praesent at sapien gravida, tempor nunc ac, tincidunt urna. Phasellus in tortor nulla. Aliquam feugiat tellus sit amet arcu aliquet luctus. 
