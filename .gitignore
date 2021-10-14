@@ -1,0 +1,41 @@
+### LaTeX ###
+## Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+*.gz
+*.fdb_latexmk
+*.lol
+
+## Intermediate documents:
+*.dvi
+*.xdv
+*-converted-to.*
+# Ignore the generated thesis pdf
+proposal/*.pdf
+thesis/*.pdf
+# WARNING: These rules might exclude image files for figures etc.
+*.ps
+*.eps
+
+## Bibliography auxiliary files (bibtex/biblatex/biber):
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+### JabRef ###
+# Backup files
+*.bak
+*.sav
