@@ -1,6 +1,6 @@
 # Thesis Template
 
-A template for theses based on the [thesis template](https://github.com/uniba-dsg/dsg-templates/tree/master/dsg-thesis-en) of the Distributed Systems Group of the University of Bamberg.
+A bachelor's/master's thesis template based on the [thesis template](https://github.com/uniba-dsg/dsg-templates/tree/master/dsg-thesis-en) of the Distributed Systems Group of the University of Bamberg.
 
 A compiled version of the template in its current state is provided in the [thesis.pdf](thesis.pdf) file.
 
