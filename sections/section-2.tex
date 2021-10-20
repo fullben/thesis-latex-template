@@ -32,6 +32,23 @@ Aenean neque leo, laoreet vel accumsan in, pellentesque id eros. Nam eu arcu sit
 
 Pellentesque facilisis felis lorem, a malesuada neque bibendum sed. Donec quis erat ex. Nunc non sapien et est dignissim hendrerit et ut ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque in metus ligula. Phasellus sed elit nunc. Integer at leo sapien. Proin lacinia velit ut enim mollis, blandit egestas mi scelerisque. Curabitur tempor leo eu massa pretium dapibus. Quisque in turpis eget ex pharetra placerat. Phasellus mattis sem augue, vel cursus mi ultrices ut. Etiam nec turpis sem. Nullam vel leo at nunc tristique scelerisque. Sed et scelerisque ex, at accumsan ipsum. In ante ex, consectetur eu fermentum et, fermentum vel ex. Fusce ut consequat massa.
 
+\begin{table}
+  \caption{An example table}
+  \centering
+  \label{tbl:example}
+  \vspace{2mm}
+  \begin{tabular}{ c c c }
+    \hline
+    Identifier & Value & Read-Only \\ 
+    \hline
+    23980457 & 23.1 & yes \\
+    23094587 & 25.5 & no \\  
+    23980444 & 24.4 & yes    
+  \end{tabular}
+\end{table}
+
+Aenean mollis eu dui ut elementum. Cras lacinia diam at nulla imperdiet gravida. Maecenas vel convallis augue. Phasellus scelerisque velit et urna viverra cursus. Nunc facilisis rhoncus tellus non auctor. Fusce posuere egestas sapien. In metus urna, scelerisque non maximus sed, facilisis id nunc.
+
 Cras sed lacus in \ac{JPA} velit molestie fermentum euismod nec augue. Cras tincidunt porta \ac{RDBMS} scelerisque. Ut volutpat consequat justo, vel volutpat dui faucibus vestibulum. Vivamus aliquam purus vehicula orci porttitor efficitur. Nulla facilisi. Aliquam suscipit \ac{JPA} molestie elit at ornare. Nam consectetur magna in lacus porttitor, et vestibulum lectus \ac{RDBMS} pellentesque \autocite{Bloch2018}.
 
 \begin{javacode}[caption=Employee class with \acs{JPA} mapping annotations., label={lst:jpa-employee-entity}]

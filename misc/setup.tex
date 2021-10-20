@@ -47,6 +47,12 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{cleveref}
 %
+% Defines numbering for figures, tables, and listings so that the counters are always prefixed with the section number
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\AtBeginDocument{\counterwithin{lstlisting}{section}}
+%
 % Include and configure watermark (use the package option "nostamp" to hide the watermark)
 \usepackage[nostamp]{draftwatermark}
 % Improves \newcommand macro
