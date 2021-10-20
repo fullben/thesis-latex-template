@@ -10,7 +10,7 @@ This section provides a brief introduction to the overall structure and major fi
 
 - [thesis.tex](thesis.tex): Main file, defines the overall structure of the document. Use this file to include the individual section/chapter files of your thesis.
 - [misc/setup.tex](misc/setup.tex): The preamble of the template. Defines packages to be included and all custom commands.
-- [bibliography/references.bib](bibliography/references.bib): The file for defining all the sources used as references in the thesis.
+- [bibliography/references.bib](bibliography/references.bib): The file for defining all the sources used as references in the thesis. You may also place any copies of the referenced works in this directory.
 - [abbreviations/abbreviations.tex](abbreviations/abbreviations.tex): The file for defining all acronyms used.
 - `figures`: Default directory for all figure files.
 - `sections`: Default directory for the sections/chapter files.
@@ -23,7 +23,12 @@ This section outlines the most important features and commands of this template.
 
 The template has various `\setXXX` commands, which can be used for configuration. Commands such as `\setthesistitle` can be utilized to define the title of the thesis. The template will use this title on the title page. Furthermore, most of the `\setXXX` commands have a matching `\XXX` command for printing the set value. Using `thesistitle` anywhere in the document will therefore result in the thesis title being printed.
 
-All available set-commands are called and documented in the initial section of the [thesis.tex](thesis.tex) file. They can be used to customize the title page (university name, faculty name, title, author name, and so on) and the declaration of authorship that is printed at the end of the document.
+All available set-commands are called and documented in the initial section of the [thesis.tex](thesis.tex) file. They can be used to customize the title page (university name, faculty name, title, author name, and so on) and the declaration of authorship.
+
+Important commands:
+
+- `\setdeclaration`: Can be used to define the contents of the *Declaration of Authorship* printed at the end of the thesis.
+- `\setgroup`: Sets the name of research group or chair the thesis will be submitted to. Aside from being printed on the title page, the name of this group will also be included in the footer of all pages.
 
 ### Code Listing Styles and Environments
 
